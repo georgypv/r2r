@@ -26,7 +26,7 @@ const GENERATED_FILES: &[&str] = &[
 const SRV_SUFFICES: &[&str] = &["Request", "Response"];
 const ACTION_SUFFICES: &[&str] = &["Goal", "Result", "Feedback", "FeedbackMessage"];
 
-fn main() {
+pub fn main() {
     r2r_common::print_cargo_watches();
     r2r_common::print_cargo_ros_distro();
 
@@ -35,7 +35,7 @@ fn main() {
     run_dynlink(&msg_list);
 }
 
-fn run_bindgen(msg_list: &[RosMsg]) {
+pub fn run_bindgen(msg_list: &[RosMsg]) {
     let env_hash = r2r_common::get_env_hash();
     let out_dir = PathBuf::from(env::var("OUT_DIR").unwrap());
     let manifest_dir = Path::new(env!("CARGO_MANIFEST_DIR"));
@@ -532,7 +532,7 @@ fn generate_constants(bindgen_dir: &Path, msg_list: &[RosMsg], bindings: &Bindin
 fn run_dynlink(_: &[RosMsg]) {}
 
 #[cfg(not(feature = "doc-only"))]
-fn run_dynlink(msg_list: &[RosMsg]) {
+pub fn run_dynlink(msg_list: &[RosMsg]) {
     r2r_common::print_cargo_link_search();
 
     let msg_map = r2r_common::as_map(msg_list);
